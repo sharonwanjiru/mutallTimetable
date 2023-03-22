@@ -11,7 +11,7 @@ $stream = fopen('interns.csv', 'r');
         <!-- Link to css -->
         <!-- <link rel="stylesheet" type="text/css" href="http://206.189.207.206/tracker/timetable/timetable.css"> -->
         <link rel="stylesheet" type="text/css" href="timetable.css">
-        <meta charset="UTF-8">
+                 <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
        
     </head>

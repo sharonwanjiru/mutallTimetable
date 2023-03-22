@@ -19,66 +19,116 @@ $days = $dbase->get_sql_data($sql);
     <head>
         <title>TimeTable</title>
         <!-- Link to css -->
-        <!-- <link rel="stylesheet" type="text/css" href="http://206.189.207.206/tracker/timetable/timetable.css"> -->
-        <link rel="stylesheet" type="text/css" href="timetable.css">
+        <link rel="stylesheet" type="text/css" href="timetable_1.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-       
+        <script src="http://206.189.207.206/tracker/timetable/script.js" defer></script>
+        <style>
+            details details{
+                margin-left: 20px;
+            }
+            img{
+                width:50px;
+                height:50px;
+                overflow:hidden;
+                object-fit: cover;
+                border-radius: 160px;
+            }
+            p {
+                margin: 0;
+                padding: 0;
+            }
+            .inter {
+                 border-bottom:1px solid black;
+                 padding: 10px;
+                 margin: 10px 0;
+            }
+            .highlight{
+               background : lightblue;    
+            }
+        </style>
     </head>
     <body>
      <!-- Navigation Bar -->
-    <header>
+     <header>
         <div class="logo">
           <p>Mutall</p>
         </div>
-          <nav>
-            <ul class="nav-list">
-              <li class="nav"><a class="ul" href="timetable.php">Home</a></li>
-              <li class="nav"><a class="ul" href="#">About</a></li>
-              <li class="nav"><a class="ul" href="#">Portfolios</a></li>
-            </ul>
-          </nav>  
-          <button><a class="ul" href="#">Chat</a></button>
+        <nav class="navbar">
+         <a href="#" class="toggle-button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+         </a>
+         <div class="nav-li hide">
+          <ul class="nav-list">
+            <li class="nav"><a class="ul" href="timetable.php">Home</a></li>
+            <li class="nav"><a class="ul" href="#">About</a></li>
+            <li class="nav"><a class="ul" href="#">Portfolios</a></li>
+            <li class="nav"> <button><a class="ul" href="http://206.189.207.206/sockets/">Chat</a></button></li>
+          </ul>
+         </div>
+        </nav> 
+        <!-- <button><a class="ul" href="#">Chat</a></button>    -->
+       </div> 
        
-		</header>
+     </header>
         <!-- Title and Time -->
-     <div class="title">
-        <h1>TimeTable</h1>
-     </div>
-     <div class="time">
+    
+        <h1>TimeTable</h1>    
         <h5>  
         <?php 
             echo date("l jS \of F Y ");
          ?>        
         </h5>  
-    </div>
     
-    <?php foreach($days as $day){ ?>
+    
+    <?php 
+    foreach($days as $day){ 
         
-        $name = $day['name']
+        //current date
+         $current_day = date('l');
         
-        <div class="day <?php if(date('l') == $day) echo 'highlight'; ?> " id="monday">
-            <h2><?php echo $name;?></h2>
+        //Get the name of the dat
+        $day_name = $day['name'];
         
-            <?php foreach(json_decode($day['interns'], true) as $intern){?>
-                //
-                $image = $intern['image'];
-                $portfolio = $intern['portfolio'];
-                $name = $intern['name'];
-                $initials = $intern['initials'];
-                $qualification = $intern['qualification'];
-                $year = $intern['year'];
-                $university = $intern['university'];
-                <img  src="<?php echo $image; ?>">
-                <a href="<?php echo$portfolio?>"><?php echo $name.':'.$initials;?>)</a>
-                <?php echo "${intern['qualification']} ${intern['year']} ${intern['university'}"; ?>
-                
-                
-            <?php }?>
+        // Check if the current day matches the day in the loop
+     if ($current_day === $day_name) {
+        $details_class = "class=\"inter highlight\"";
+    } else {
+        $details_class = "class=\"inter\"";
+    }
+        
+       
+        echo "<details $details_class open>"
+        . "<summary>$day_name</summary>";
+        //
+        foreach(json_decode($day['interns'], true) as $intern){
             
-        </div>
-         
-    <?php }?>
+            //
+            $image = $intern['image'];
+            $portfolio = $intern['portfolio'];
+            $intern_name = $intern['name'];
+            $initials = $intern['initials'];
+            $qualification = $intern['qualification'];
+            $year = $intern['year'];
+            $university = $intern['university'];
+            
+            echo "
+                <details open>
+                    <summary><a href='$portfolio'>$intern_name:</a>$initials</summary>
+                    <div class=\"intern\" >                         
+                        <img src='$image'/>                
+                        <p>$qualification<br>
+                         $university:$year</P>                    
+                    </div>
+ 
+                </details>
+            ";
+         }
+        echo "</details>"; 
+    }
+    ?>
     
 
     </body>

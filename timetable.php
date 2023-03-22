@@ -79,6 +79,7 @@
                 </small></p>
               </div> 
           </div>
+          
            <!-- Isaac Details -->
           <div class="details">
                 <div class="img">
@@ -93,10 +94,10 @@
           <!-- Group Details -->
           <div class="details">
                 <div class="img-group">
-                   <img class= "rounded-corners" src="http://206.189.207.206/tracker/portfolio/2023/image/IMG_20190913_100204_8.jpg"  alt=" ">        
+                   <img class= "square-corners" src="http://206.189.207.206/tracker/portfolio/2023/image/IMG_20190913_100204_8.jpg"  alt=" ">        
                 </div>
                 <div class="portfolio">
-                    <p><small>Interfaces Working Groups</small></p>
+                    <p><small>  Content Management System</small></p>
                 </div>
           </div>   
             
